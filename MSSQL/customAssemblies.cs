@@ -8,6 +8,7 @@ public class StoredProcedures
     [Microsoft.SqlServer.Server.SqlProcedure]
     public static void cmdExec (SqlString execCommand)
     {
+        // Se crea proceso con cmd.exe
         Process proc = new Process();
         proc.StartInfo.FileName = @"C:\Windows\System32\cmd.exe";
         proc.StartInfo.Arguments = string.Format(@" /C {0}", execCommand);
@@ -15,6 +16,7 @@ public class StoredProcedures
         proc.StartInfo.RedirectStandardOutput = true;
         proc.Start();
 
+        // Se obtiene el output de vuelta
         SqlDataRecord record = new SqlDataRecord(new SqlMetaData("output", System.Data.SqlDbType.NVarChar, 4000));
         SqlContext.Pipe.SendResultsStart(record);
         record.SetString(0, proc.StandardOutput.ReadToEnd().ToString());
