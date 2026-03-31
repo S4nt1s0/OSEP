@@ -23,6 +23,11 @@ namespace SQL
               Console.WriteLine("Auth failed");
               Environment.Exit(0);
             }
+            // Query 
+            String querylogin = "SELECT SYSTEM_USER;";
+            SqlCommand command = new SqlCommand(querylogin, con);
+            SqlDataReader reader = command.ExecuteReader();
+
 
             con.Close();
         }
