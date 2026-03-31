@@ -23,7 +23,7 @@ namespace SQL
               Console.WriteLine("Auth failed");
               Environment.Exit(0);
             }
-            // Se ejecuta query 
+            // Se ejecuta query para obtener el usuario
             String querylogin = "SELECT SYSTEM_USER;";
             SqlCommand command = new SqlCommand(querylogin, con);
             SqlDataReader reader = command.ExecuteReader();
@@ -33,6 +33,21 @@ namespace SQL
             Console.WriteLine("Logged in as: " + reader[0]);
             reader.Close();
 
+            //Se ejecuta query para obtener role y se lee resultado
+            String querypublicrole = "SELECT IS_SRVROLEMEMBER('public');";
+            command = new SqlCommand(querypublicrole, con);
+            reader = command.ExecuteReader();
+            reader.Read();
+            Int32 role = Int32.Parse(reader[0].ToString());
+            if(role == 1)
+            {
+              Console.WriteLine("User is a member of public role");
+            }
+            else
+            {
+              Console.WriteLine("User is NOT a member of public role");
+            }
+            reader.Close();
 
             con.Close();
         }
