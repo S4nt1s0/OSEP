@@ -23,10 +23,15 @@ namespace SQL
               Console.WriteLine("Auth failed");
               Environment.Exit(0);
             }
-            // Query 
+            // Se ejecuta query 
             String querylogin = "SELECT SYSTEM_USER;";
             SqlCommand command = new SqlCommand(querylogin, con);
             SqlDataReader reader = command.ExecuteReader();
+
+            // Se lee resultado de query
+            reader.Read();
+            Console.WriteLine("Logged in as: " + reader[0]);
+            reader.Close();
 
 
             con.Close();
