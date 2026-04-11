@@ -1,3 +1,4 @@
+//Compilar con gcc -o hack.out hack.c -z execstack
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
